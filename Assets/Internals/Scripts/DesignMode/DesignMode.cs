@@ -13,6 +13,12 @@ public class DesignMode : MonoBehaviour
 
 	public InputField NameInput;
 
+	public Text NamePreview;
+
+	public ToastMessage ToastMessage;
+
+
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -58,6 +64,8 @@ public class DesignMode : MonoBehaviour
 
 		// Save
 		SaveCharData.SaveData (data);
+
+		ToastMessage.ShowMessage ("Data Saved!");
 	}
 
 	public void GoDesign ()
@@ -83,5 +91,7 @@ public class DesignMode : MonoBehaviour
 
 		Profile.SetActive (false);
 		Design.SetActive (true);
+
+		NamePreview.text = SaveName.Instance.SetName;
 	}
 }

@@ -54,7 +54,10 @@ public class PartsSelector : MonoBehaviour
 			}
 		}
 
-		PreviewPixelControl.UpdatePart ((ChrPart)System.Enum.Parse (typeof(ChrPart), part));
+
+		ChrPart setPart = (ChrPart)System.Enum.Parse (typeof(ChrPart), part);
+		PreviewPixelControl.UpdatePart (setPart);
+		JointDisplay.ChangeJointDisplayDef (setPart);
 	}
 }
 

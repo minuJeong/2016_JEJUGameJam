@@ -10,32 +10,47 @@ public class JointDisplay : MonoBehaviour
 		JointSelecterParent = transform;
 	}
 
-	public static void ShowJoint (PartJointDef def)
+	public static void ChangeJointDisplayDef (ChrPart part)
 	{
-		if (def is HeadJointDef)
+		if (part == ChrPart.Head)
 		{
 			Display_HeadJointDef ();
 		}
 		else
-		if (def is BodyJointDef)
+		if (part == ChrPart.Body)
 		{
-			
+			Display_BodyJointDef ();
 		}
 		else
-		if (def is RLegJointDef)
+		if (part == ChrPart.RLeg)
 		{
-			
+			Display_RLegJointDef ();
 		}
 		else
-		if (def is LLegJointDef)
+		if (part == ChrPart.LLeg)
 		{
-			
+			Display_LLegJointDef ();
 		}
 	}
 
 
-	void Display_HeadJointDef ()
+	static void Display_HeadJointDef ()
 	{
-		Debug.Log ("DDD");
+		Debug.Log ("Head");
+	}
+
+	static void Display_BodyJointDef ()
+	{
+		Debug.Log ("Body");
+	}
+
+	static void Display_RLegJointDef ()
+	{
+		Debug.Log ("RLeg");
+	}
+
+	static void Display_LLegJointDef ()
+	{
+		Debug.Log ("LLeg");
 	}
 }

@@ -1,33 +1,39 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.Collections.Generic;
-using System.IO;
 
 
+[Serializable]
 public abstract class PartJointDef
 {
+	
 }
 
+[Serializable]
 public class HeadJointDef : PartJointDef
 {
-	public Vector2 Neck;
+	public int[] Neck;
 }
 
+[Serializable]
 public class BodyJointDef : PartJointDef
 {
-	public Vector2 Neck;
-	public Vector2 RLegPelvis;
-	public Vector2 LLegPelvis;
+	public int[] Neck;
+	public int[] RLegPelvis;
+	public int[] LLegPelvis;
 }
 
+[Serializable]
 public class RLegJointDef : PartJointDef
 {
-	public Vector2 Pelvis;
+	public int[] Pelvis;
 }
 
+[Serializable]
 public class LLegJointDef : PartJointDef
 {
-	public Vector2 Pelvis;
+	public int[] Pelvis;
 }
 
 
@@ -121,6 +127,22 @@ public class PreviewPixelControl : MonoBehaviour
 
 			m_Pixels [x, y] = value;
 		}
+	}
+
+	static bool IsInRange (int x, int y)
+	{
+		bool result = true;
+		if (x < 0 || x >= X_COUNT)
+		{
+			result = false;
+		}
+
+		if (y < 0 || y >= Y_COUNT)
+		{
+			result = false;
+		}
+
+		return result;
 	}
 
 
@@ -218,20 +240,7 @@ public class PreviewPixelControl : MonoBehaviour
 		}
 	}
 
-
-	static bool IsInRange (int x, int y)
+	public void OnClickSave ()
 	{
-		bool result = true;
-		if (x < 0 || x >= X_COUNT)
-		{
-			result = false;
-		}
-
-		if (y < 0 || y >= Y_COUNT)
-		{
-			result = false;
-		}
-
-		return result;
 	}
 }

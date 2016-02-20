@@ -28,6 +28,25 @@ public class DesignMode : MonoBehaviour
 		SceneManager.LoadScene ("FrontEnd", LoadSceneMode.Single);	
 	}
 
+	public void OnSave ()
+	{
+		SaveModel data = new SaveModel ();
+		data.SaveName = "";
+
+		data.BodyData = new BodyData ();
+		data.BodyData.TextureData = new Texture2D (PreviewPixelControl.X_COUNT, PreviewPixelControl.Y_COUNT).EncodeToPNG ();
+		data.BodyData.JointDef = new BodyJointDef ();
+		data.BodyData.JointDef.Neck = new [] { 10, 20 };
+
+		SaveCharData.SaveData (data);
+	}
+
+	public void OnLoad ()
+	{
+		// NOT USED
+		SaveModel[] models = LoadCharacter.LoadData ();
+	}
+
 	public void GoDesign ()
 	{
 		Profile.SetActive (false);

@@ -101,5 +101,13 @@ public class CharacterGenerator : MonoBehaviour
 		Container.AddComponent<Animation> ();
 		Container.GetComponent<Animation> ().AddClip (Clip_Idle, "idle");
 		Container.GetComponent<Animation> ().Play ("idle", UnityEngine.PlayMode.StopAll);
+
+
+		Vector3 temp = new Vector3 ();
+		temp.x = UnityEngine.Random.Range (-8.7F, 8.7F);
+		temp.y = -2.0F;
+		Container.transform.position = temp;
+
+		Container.AddComponent<Pawn> ();
 	}
 }

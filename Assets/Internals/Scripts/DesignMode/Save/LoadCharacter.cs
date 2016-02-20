@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -12,7 +13,7 @@ public static class LoadCharacter
 
 		int len = files.Length;
 
-		SaveModel[] model = new SaveModel[len];
+		List<SaveModel> models = new List<SaveModel> ();
 
 		for (int i = 0; i < len; i++)
 		{
@@ -27,11 +28,16 @@ public static class LoadCharacter
 
 			BinaryFormatter BF = new BinaryFormatter ();
 
-			model [i] = (SaveModel)BF.Deserialize (FStream);
+			var deserialized = (SaveModel)BF.Deserialize (FStream);
 
-			Debug.Log ("after deserialize");
+			if (deserialized == null)
+			{
+				continue;
+			}
+
+			models.Add (deserialized);
 		}
 
-		return model;
+		return models.ToArray ();
 	}
 }

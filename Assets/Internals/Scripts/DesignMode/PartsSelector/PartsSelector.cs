@@ -8,15 +8,22 @@ using UnityEditor;
 
 public class PartsSelector : MonoBehaviour
 {
+	public static PartsSelector Instance;
+
 	public PartControl[] m_Controls;
 
-	PartControl m_CurrentPart;
+	public PartControl m_CurrentPart;
 
 	[SerializeField]
 	Color m_OnSelect;
 
 	[SerializeField]
 	Color m_OnDeselect;
+
+	void Awake ()
+	{
+		Instance = this;
+	}
 
 
 	void Start ()

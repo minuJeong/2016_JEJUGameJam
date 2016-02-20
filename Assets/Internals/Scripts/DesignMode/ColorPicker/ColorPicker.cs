@@ -31,6 +31,8 @@ public class ColorPicker : MonoBehaviour
 		PallettePicker.material.SetFloat ("_Hue", m_SelectingColor.h);
 
 		CurrentColor = SelectedColor.color;
+
+		DesignModeSelector.Instance.DMode = DesignDetailMode.DrawingMode;
 	}
 
 	public void OnClickHue ()

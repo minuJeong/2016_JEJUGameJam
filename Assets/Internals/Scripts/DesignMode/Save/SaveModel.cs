@@ -15,6 +15,11 @@ public class SaveModel
 	public RLegData RLegData;
 
 	public LLegData LLegData;
+
+	public override string ToString ()
+	{
+		return string.Format ("[JointData] {0}, {1}", SaveName, ID);
+	}
 }
 
 [Serializable]
@@ -38,11 +43,11 @@ public class BodyData : JointData
 [Serializable]
 public class RLegData : JointData
 {
-	public RLegData JointDef;
+	public RLegJointDef JointDef;
 }
 
 [Serializable]
 public class LLegData : JointData
 {
-	public LLegData JointDef;
+	public LLegJointDef JointDef;
 }

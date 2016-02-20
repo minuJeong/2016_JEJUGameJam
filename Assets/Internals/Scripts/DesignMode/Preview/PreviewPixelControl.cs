@@ -7,39 +7,38 @@ using System.Collections.Generic;
 [Serializable]
 public abstract class PartJointDef
 {
-	
 }
 
 [Serializable]
 public class HeadJointDef : PartJointDef
 {
-	public int[] Neck;
+	public float[] Neck;
 }
 
 [Serializable]
 public class BodyJointDef : PartJointDef
 {
-	public int[] Neck;
-	public int[] RLegPelvis;
-	public int[] LLegPelvis;
+	public float[] Neck;
+	public float[] RLegPelvis;
+	public float[] LLegPelvis;
 }
 
 [Serializable]
 public class RLegJointDef : PartJointDef
 {
-	public int[] Pelvis;
+	public float[] Pelvis;
 }
 
 [Serializable]
 public class LLegJointDef : PartJointDef
 {
-	public int[] Pelvis;
+	public float[] Pelvis;
 }
 
 
 public class PreviewPixelControl : MonoBehaviour
 {
-	readonly static Dictionary<ChrPart, PreviewPixelControl> partToControl = new Dictionary<ChrPart, PreviewPixelControl> ();
+	readonly public static Dictionary<ChrPart, PreviewPixelControl> PartToControlMap = new Dictionary<ChrPart, PreviewPixelControl> ();
 
 	// Part
 	public ChrPart Part;
@@ -67,12 +66,10 @@ public class PreviewPixelControl : MonoBehaviour
 
 	protected Vector3 m_PreviousPosR;
 
-	protected Texture2D m_Texture;
-
 
 	public static void UpdatePart (ChrPart part)
 	{
-		var e = partToControl.GetEnumerator ();
+		var e = PartToControlMap.GetEnumerator ();
 		while (e.MoveNext ())
 		{
 			if (e.Current.Key == part)
@@ -173,8 +170,9 @@ public class PreviewPixelControl : MonoBehaviour
 
 		ColorPicker.CurrentColor = Color.white;
 
+		PartToControlMap [Part] = this;
 
-		partToControl [Part] = this;
+		UpdatePart (ChrPart.Head);
 
 		switch (Part)
 		{
@@ -200,6 +198,11 @@ public class PreviewPixelControl : MonoBehaviour
 	// On Click Handler
 	public void OnClick (bool isDragging)
 	{
+		if (DesignModeSelector.Instance.DMode != DesignDetailMode.DrawingMode)
+		{
+			return;
+		}
+
 		Vector3 clickPos = Input.mousePosition;
 
 		clickPos.x -= transform.position.x;
@@ -240,7 +243,31 @@ public class PreviewPixelControl : MonoBehaviour
 		}
 	}
 
-	public void OnClickSave ()
+	public Texture2D GetAsTexture ()
 	{
+		Texture2D Generated = new Texture2D (X_COUNT, Y_COUNT);
+
+		for (int y = 0; y < Y_COUNT; y++)
+		{
+			for (int x = 0; x < X_COUNT; x++)
+			{
+				Color temp = this [x, y].color;
+
+				if (Mathf.Abs (temp.r - 1.0F) < 0.01F &&
+				    Mathf.Abs (temp.g - 1.0F) < 0.01F &&
+				    Mathf.Abs (temp.b - 1.0F) < 0.01F)
+				{
+					temp.a = 0.0F;
+				}
+				else
+				{
+					temp.a = 1.0F;
+				}
+
+				Generated.SetPixel (x, y, temp);
+			}
+		}
+
+		return Generated;
 	}
 }

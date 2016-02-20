@@ -24,4 +24,13 @@ public static class SaveCharData
 
 		FStream.Close ();
 	}
+
+	public static SaveModel GetModel ()
+	{
+		SaveModel model = new SaveModel ();
+
+		model.SaveName = "PlayerName";
+
+		return model;
+	}
 }

@@ -60,12 +60,6 @@ public class DesignMode : MonoBehaviour
 		SaveCharData.SaveData (data);
 	}
 
-	public void OnLoad ()
-	{
-		// NOT USED
-		// SaveModel[] models = LoadCharacter.LoadData ();
-	}
-
 	public void GoDesign ()
 	{
 		if (!StatPoint.Instance.IsStatSafe)

@@ -20,6 +20,11 @@ public class CharacterGenerator : MonoBehaviour
 
 		HeadJointDef HeadDef = new HeadJointDef ();
 		HeadDef.Neck = model.HeadData.JointDef.Neck;
+		if (HeadDef.Neck [0] == 0.0F && HeadDef.Neck [1] == 0.0F)
+		{
+			HeadDef.Neck [0] = 0.5F;
+			HeadDef.Neck [1] = 0.5F;
+		}
 
 		// Body
 		Texture2D BodyTex = new Texture2D (PreviewPixelControl.X_COUNT, PreviewPixelControl.Y_COUNT);
@@ -30,12 +35,36 @@ public class CharacterGenerator : MonoBehaviour
 		BodyDef.RLegPelvis = model.BodyData.JointDef.RLegPelvis;
 		BodyDef.Neck = model.BodyData.JointDef.Neck;
 
+		if (BodyDef.Neck [0] == 0.0F && BodyDef.Neck [1] == 0.0F)
+		{
+			BodyDef.Neck [0] = 0.5F;
+			BodyDef.Neck [1] = 0.5F;
+		}
+
+		if (BodyDef.LLegPelvis [0] == 0.0F && BodyDef.LLegPelvis [1] == 0.0F)
+		{
+			BodyDef.LLegPelvis [0] = 0.5F;
+			BodyDef.LLegPelvis [1] = 0.5F;
+		}
+
+		if (BodyDef.RLegPelvis [0] == 0.0F && BodyDef.RLegPelvis [1] == 0.0F)
+		{
+			BodyDef.RLegPelvis [0] = 0.5F;
+			BodyDef.RLegPelvis [1] = 0.5F;
+		}
+
 		// RLeg
 		Texture2D RLegTex = new Texture2D (PreviewPixelControl.X_COUNT, PreviewPixelControl.Y_COUNT);
 		RLegTex.LoadImage (model.RLegData.TextureData);
 
 		RLegJointDef RLegDef = new RLegJointDef ();
 		RLegDef.Pelvis = model.RLegData.JointDef.Pelvis;
+
+		if (RLegDef.Pelvis [0] == 0.0F && RLegDef.Pelvis [1] == 0.0F)
+		{
+			RLegDef.Pelvis [0] = 0.5F;
+			RLegDef.Pelvis [1] = 0.5F;
+		}
 
 		// LLeg
 		Texture2D LLegTex = new Texture2D (PreviewPixelControl.X_COUNT, PreviewPixelControl.Y_COUNT);
@@ -44,10 +73,17 @@ public class CharacterGenerator : MonoBehaviour
 		RLegJointDef LLegDef = new RLegJointDef ();
 		LLegDef.Pelvis = model.LLegData.JointDef.Pelvis;
 
+		if (LLegDef.Pelvis [0] == 0.0F && LLegDef.Pelvis [1] == 0.0F)
+		{
+			LLegDef.Pelvis [0] = 0.5F;
+			LLegDef.Pelvis [1] = 0.5F;
+		}
+
 
 		// Generate and Instantiate to GameObject
 		GameObject Container = new GameObject (model.SaveName);
-		Container.transform.localScale = Vector3.one * 10.0F;
+		float Scaler = Random.Range (4.0F, 5.0F);
+		Container.transform.localScale = Vector3.one * Scaler;
 
 
 		// Body
@@ -105,9 +141,10 @@ public class CharacterGenerator : MonoBehaviour
 
 		Vector3 temp = new Vector3 ();
 		temp.x = UnityEngine.Random.Range (-8.7F, 8.7F);
-		temp.y = -2.0F;
+		temp.y = -1.0F;
 		Container.transform.position = temp;
 
 		Container.AddComponent<Pawn> ();
+		Pawn.Pawns.Add (Container.GetComponent<Pawn> ());
 	}
 }

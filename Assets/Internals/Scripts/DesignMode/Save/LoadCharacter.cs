@@ -18,13 +18,13 @@ public static class LoadCharacter
 		for (int i = 0; i < len; i++)
 		{
 			var file = files [i];
-			
-			FileStream FStream = File.Open (file, FileMode.Open);
 
 			if (file.Contains (".DS_Store"))
 			{
 				continue;
 			}
+
+			FileStream FStream = File.Open (file, FileMode.Open);
 
 			BinaryFormatter BF = new BinaryFormatter ();
 
@@ -36,6 +36,8 @@ public static class LoadCharacter
 			}
 
 			models.Add (deserialized);
+
+			FStream.Close ();
 		}
 
 		return models.ToArray ();

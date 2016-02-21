@@ -73,7 +73,21 @@ public class Pawn : MonoBehaviour
 			return;
 		}
 
-		transform.position -= (TargetPos - transform.position) * (MoveSpeed * Time.deltaTime);
+		Vector3 delta = (TargetPos - transform.position);
+
+		Vector3 temp = transform.localScale;
+		if (delta.x > 0)
+		{
+			temp.x = -Mathf.Abs (transform.localScale.x);
+		}
+
+		if (delta.x < 0)
+		{
+			temp.x = Mathf.Abs (transform.localScale.x);
+		}
+		transform.localScale = temp;
+
+		transform.position -= delta * (MoveSpeed * Time.deltaTime);
 	}
 
 

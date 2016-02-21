@@ -13,6 +13,9 @@ public class PawnSpawner : MonoBehaviour
 
 	public GameObject LightSabrePrefab;
 
+	public AudioSource Audio;
+
+
 	void Awake ()
 	{
 		Instance = this;
@@ -32,5 +35,11 @@ public class PawnSpawner : MonoBehaviour
 
 			CharacterGenerator.Instance.Generate (SavedLoader.Instance.PickModel ());
 		}
+	}
+
+
+	public void PlayLightSabreSound ()
+	{
+		Audio.Play ();	
 	}
 }

@@ -143,6 +143,7 @@ public class JointDisplay : MonoBehaviour
 
 		knob_Neck.SetActive (true);
 
+		// Turn off
 		if (DictMap.ContainsKey (BodyJointDef))
 		{
 			DictMap [BodyJointDef].ForEach (item =>
@@ -170,8 +171,8 @@ public class JointDisplay : MonoBehaviour
 	void Display_BodyJointDef ()
 	{
 		GameObject knob_Neck;
-		GameObject knob_RLeg = Instantiate (KnobTemplate);
-		GameObject knob_LLeg = Instantiate (KnobTemplate);
+		GameObject knob_RLeg;
+		GameObject knob_LLeg;
 
 		if (DictMap.ContainsKey (BodyJointDef))
 		{
@@ -215,6 +216,7 @@ public class JointDisplay : MonoBehaviour
 		knob_LLeg.SetActive (true);
 
 
+		// Turn off
 		if (DictMap.ContainsKey (HeadJointDef))
 		{
 			DictMap [HeadJointDef].ForEach (item =>
@@ -263,6 +265,7 @@ public class JointDisplay : MonoBehaviour
 
 		knob_Pelvis.SetActive (true);
 
+		// Turn off
 		if (DictMap.ContainsKey (HeadJointDef))
 		{
 			DictMap [HeadJointDef].ForEach (item =>

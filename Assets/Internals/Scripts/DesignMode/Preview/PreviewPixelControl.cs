@@ -89,6 +89,11 @@ public class PreviewPixelControl : MonoBehaviour
 			{
 				foreach (var pixel in e.Current.Value.m_Pixels)
 				{
+					if (null == pixel)
+					{
+						continue;
+					}
+
 					var c = pixel.color;
 					c.a = m_AlphaOtherLayer;
 					pixel.color = c;
@@ -210,6 +215,18 @@ public class PreviewPixelControl : MonoBehaviour
 
 		Vector3 ratio = new Vector3 (clickPos.x / m_ClickArea.width, clickPos.y / m_ClickArea.height);
 
+		// Spoid
+		if (Input.GetKey (KeyCode.LeftCommand))
+		{
+			int x = (int)(ratio.x * X_COUNT);
+			int y = (int)(ratio.y * Y_COUNT);
+
+			ColorPicker.CurrentColor = this [x, y].color;
+
+			return;
+		}
+
+		// Brush
 		if (isDragging)
 		{
 			StrokeTo (ratio);

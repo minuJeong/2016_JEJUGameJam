@@ -47,8 +47,7 @@ public class CharacterGenerator : MonoBehaviour
 
 		// Generate and Instantiate to GameObject
 		GameObject Container = new GameObject (model.SaveName);
-		Container.transform.localScale = Vector3.one * 50.0F;
-
+		Container.transform.localScale = Vector3.one * 10.0F;
 
 
 		// Body
@@ -56,7 +55,8 @@ public class CharacterGenerator : MonoBehaviour
 		Body.GetComponent<SpriteRenderer> ().sprite = 
 			Sprite.Create (BodyTex,
 			new Rect (0, 0, BodyTex.width, BodyTex.height),
-			new Vector2 (0.5F, 0.5F));
+			new Vector2 (0.5F, 0.5F),
+			100.0F, 1, SpriteMeshType.FullRect, Vector4.zero);
 		Body.transform.SetParent (Container.transform);
 		Body.transform.localScale = Vector3.one;
 
@@ -69,7 +69,8 @@ public class CharacterGenerator : MonoBehaviour
 		Head.GetComponent<SpriteRenderer> ().sprite =
 			Sprite.Create (HeadTex,
 			new Rect (0, 0, HeadTex.width, HeadTex.height),
-			new Vector2 (HeadDef.Neck [0], HeadDef.Neck [1]));
+			new Vector2 (HeadDef.Neck [0], HeadDef.Neck [1]),
+			100.0F, 1, SpriteMeshType.FullRect, Vector4.zero);
 		Head.transform.SetParent (Body.transform);
 		Head.transform.localPosition = new Vector2 (BodyDef.Neck [0] - 0.5F, BodyDef.Neck [1] - 0.5F) * (pixelCount / ppu);
 		Head.transform.localScale = Vector3.one;
@@ -79,7 +80,8 @@ public class CharacterGenerator : MonoBehaviour
 		RLeg.GetComponent<SpriteRenderer> ().sprite =
 			Sprite.Create (RLegTex,
 			new Rect (0, 0, RLegTex.width, RLegTex.height),
-			new Vector2 (RLegDef.Pelvis [0], RLegDef.Pelvis [1]));
+			new Vector2 (RLegDef.Pelvis [0], RLegDef.Pelvis [1]),
+			100.0F, 1, SpriteMeshType.FullRect, Vector4.zero);
 		RLeg.transform.SetParent (Body.transform);
 		RLeg.transform.localPosition = new Vector2 (BodyDef.RLegPelvis [0] - 0.5F, BodyDef.RLegPelvis [1] - 0.5F) * (pixelCount / ppu);
 		RLeg.transform.localScale = Vector3.one;
@@ -89,7 +91,8 @@ public class CharacterGenerator : MonoBehaviour
 		LLeg.GetComponent<SpriteRenderer> ().sprite =
 			Sprite.Create (LLegTex,
 			new Rect (0, 0, LLegTex.width, LLegTex.height),
-			new Vector2 (LLegDef.Pelvis [0], LLegDef.Pelvis [1]));
+			new Vector2 (LLegDef.Pelvis [0], LLegDef.Pelvis [1]),
+			100.0F, 1, SpriteMeshType.FullRect, Vector4.zero);
 		LLeg.transform.SetParent (Body.transform);
 		LLeg.transform.localPosition = new Vector2 (BodyDef.LLegPelvis [0] - 0.5F, BodyDef.LLegPelvis [1] - 0.5F) * (pixelCount / ppu);
 		LLeg.transform.localScale = Vector3.one;
@@ -98,5 +101,13 @@ public class CharacterGenerator : MonoBehaviour
 		Container.AddComponent<Animation> ();
 		Container.GetComponent<Animation> ().AddClip (Clip_Idle, "idle");
 		Container.GetComponent<Animation> ().Play ("idle", UnityEngine.PlayMode.StopAll);
+
+
+		Vector3 temp = new Vector3 ();
+		temp.x = UnityEngine.Random.Range (-8.7F, 8.7F);
+		temp.y = -2.0F;
+		Container.transform.position = temp;
+
+		Container.AddComponent<Pawn> ();
 	}
 }

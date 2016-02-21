@@ -15,25 +15,20 @@ public class JointKnob : MonoBehaviour
 
 	public bool IsDragging = false;
 
+
 	void Start ()
 	{
 		ValidRect = ValidRectTransform.rect;
 		ValidRect.x += ValidRectTransform.position.x;
 		ValidRect.y += ValidRectTransform.position.y;
-	}
 
-	public void StartDrag ()
-	{
-		UpdatePos ();
-	}
-
-	public void StopDrag ()
-	{
-		UpdatePos ();
+		GetComponent<Image> ().color = Color.red;
 	}
 
 	public void UpdatePosition ()
 	{
+		GetComponent<Image> ().color = Color.yellow;
+
 		UpdatePos ();
 	}
 

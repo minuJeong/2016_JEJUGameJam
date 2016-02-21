@@ -41,9 +41,10 @@ public class DesignModeSelector : MonoBehaviour
 
 			case DesignDetailMode.JointMode:
 				Checker.transform.position = JointMode.transform.position;
-				JointDisplay.ChangeJointDisplayDef (PartsSelector.Instance.m_CurrentPart.Part);
 				break;
 			}
+
+			JointDisplay.ChangeJointDisplayDef (PartsSelector.Instance.m_CurrentPart.Part);
 		}
 	}
 

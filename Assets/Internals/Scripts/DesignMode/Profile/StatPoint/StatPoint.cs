@@ -62,7 +62,7 @@ public class StatPoint : MonoBehaviour
 
 		if (IsStatSafe)
 		{
-			RemainingPointText.color = Color.black;
+			RemainingPointText.color = Color.white;
 		}
 		else
 		{

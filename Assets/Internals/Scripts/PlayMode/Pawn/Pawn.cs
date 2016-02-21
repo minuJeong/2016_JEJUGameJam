@@ -46,19 +46,22 @@ public class Pawn : MonoBehaviour
 	public float ATTACK = 10.0F;
 
 
-	public AnimationClip Idle;
 
-	public AnimationClip Walk;
-
-	public AnimationClip Attack;
-
-	public GameObject LightSabre;
+	GameObject LightSabre;
 
 
 	// Use this for initialization
 	void Start ()
 	{
 		TargetPos = transform.position;
+
+		if (null != PawnSpawner.Instance.LightSabrePrefab)
+		{
+			LightSabre = Instantiate (PawnSpawner.Instance.LightSabrePrefab);
+			LightSabre.transform.SetParent (transform);
+			LightSabre.transform.localPosition = new Vector3 (-0.08F, 0.0F);
+			LightSabre.transform.localRotation = Quaternion.Euler (0, 0, 38.0F);
+		}
 
 		StartCoroutine (Think ());
 	}
@@ -115,11 +118,11 @@ public class Pawn : MonoBehaviour
 
 	void WalkToTarget ()
 	{
-		if (null != Walk)
+		if (null != PawnSpawner.Instance.Walk)
 		{
 			if (GetComponent<Animation> ().GetClip ("Walk") == null)
 			{
-				GetComponent<Animation> ().AddClip (Walk, "Walk");
+				GetComponent<Animation> ().AddClip (PawnSpawner.Instance.Walk, "Walk");
 			}
 			GetComponent<Animation> ().Play ("Walk");
 		}
@@ -130,14 +133,16 @@ public class Pawn : MonoBehaviour
 
 	void AttackTarget ()
 	{
-		if (null != Attack)
+		if (null != PawnSpawner.Instance.Attack)
 		{
 			if (GetComponent<Animation> ().GetClip ("Attack") == null)
 			{
-				GetComponent<Animation> ().AddClip (Attack, "Attack");
+				GetComponent<Animation> ().AddClip (PawnSpawner.Instance.Attack, "Attack");
 			}
 			GetComponent<Animation> ().Play ("Attack");
 		}
+
+		LightSabre.transform.DORotate (new Vector3 (0, 0, Random.Range (-120, 120)), 0.2F, RotateMode.Fast).SetRelative ();
 
 		TargetPos = transform.position;
 

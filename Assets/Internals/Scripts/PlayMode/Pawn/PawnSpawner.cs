@@ -3,6 +3,20 @@ using System.Collections;
 
 public class PawnSpawner : MonoBehaviour
 {
+	public static PawnSpawner Instance;
+
+	public AnimationClip Idle;
+
+	public AnimationClip Walk;
+
+	public AnimationClip Attack;
+
+	public GameObject LightSabrePrefab;
+
+	void Awake ()
+	{
+		Instance = this;
+	}
 
 	// Use this for initialization
 	void Start ()

@@ -52,6 +52,8 @@ public class Pawn : MonoBehaviour
 
 	public AnimationClip Attack;
 
+	public GameObject LightSabre;
+
 
 	// Use this for initialization
 	void Start ()

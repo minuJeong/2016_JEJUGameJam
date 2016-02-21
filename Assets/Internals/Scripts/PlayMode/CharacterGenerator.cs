@@ -3,17 +3,18 @@ using System.Collections;
 
 public class CharacterGenerator : MonoBehaviour
 {
+	public static CharacterGenerator Instance;
+
 	public AnimationClip Clip_Idle;
 
-	public void Generate ()
+	void Awake ()
 	{
-		SaveModel model = SavedLoader.Instance.SelectedModel;
+		Instance = this;
+	}
 
-		if (null == model)
-		{
-			return;
-		}
 
+	public void Generate (SaveModel model)
+	{
 		// Head
 		Texture2D HeadTex = new Texture2D (PreviewPixelControl.X_COUNT, PreviewPixelControl.Y_COUNT);
 		HeadTex.LoadImage (model.HeadData.TextureData);
@@ -146,5 +147,17 @@ public class CharacterGenerator : MonoBehaviour
 
 		Container.AddComponent<Pawn> ();
 		Pawn.Pawns.Add (Container.GetComponent<Pawn> ());
+	}
+
+	public void Generate ()
+	{
+		SaveModel model = SavedLoader.Instance.SelectedModel;
+
+		if (null == model)
+		{
+			return;
+		}
+
+		Generate (model);
 	}
 }

@@ -67,4 +67,10 @@ public class SavedLoader : MonoBehaviour
 
 		DropDownMenu.AddOptions (optionDataSet);
 	}
+
+	public SaveModel PickModel ()
+	{
+		SaveModel[] models = LoadCharacter.LoadData ();
+		return models [UnityEngine.Random.Range (0, models.Length)];
+	}
 }
